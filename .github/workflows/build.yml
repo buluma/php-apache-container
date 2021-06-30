@@ -23,8 +23,8 @@ jobs:
           - '8.0'
           - '7.4'
           - '7.3'
-          - '7.2'
-          - '7.1'
+          # - '7.2'
+          # - '7.1'
 
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +44,7 @@ jobs:
         run: ansible-playbook --extra-vars="@vars/${{ matrix.php_version }}.yml" main.yml
 
       - name: Run the container.
-        run: docker run -d --name=php-apache -p 8080:80 buluma/php-apache:${{ matrix.php_version }} /usr/sbin/apache2ctl -D FOREGROUND
+        run: docker run -d --name=php-apache -p 8080:80 geerlingguy/php-apache:${{ matrix.php_version }} /usr/sbin/apache2ctl -D FOREGROUND
 
       - name: Verify container has correct PHP version and works.
         run: |
