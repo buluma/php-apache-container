@@ -58,10 +58,11 @@ jobs:
     strategy:
       matrix:
         php_version:
+          - '8.0'
           - '7.4'
           - '7.3'
-          - '7.2'
-          - '7.1'
+          # - '7.2'
+          # - '7.1'
     needs: test
     if: github.ref == 'refs/heads/master'
 
@@ -88,19 +89,31 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Push image.
-        run: |
-          # Push $php_version tag.
-          docker push buluma/php-apache:${{ matrix.php_version }}
-          # Push $php_version + '.x' tag.
-          docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.x
-          docker push buluma/php-apache:${{ matrix.php_version }}.x
-          # Push $php_version + '.PHP_RELEASE_VERSION' tag.
-          php_release_version=$(docker run --rm buluma/php-apache:${{ matrix.php_version }} bash -c "php -r 'echo PHP_RELEASE_VERSION;'")
-          docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
-          docker push buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
-          # Push latest tag if building latest version.
-          if [[ "${{ matrix.php_version }}" == "7.4" ]]; then
-            docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:latest
-            docker push buluma/php-apache:latest
-          fi
+      - name: Build and push image.
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ github.repository }}:latest
+
+      # - name: Push image.
+      #   run: |
+      #     # Push $php_version tag.
+      #     docker push buluma/php-apache:${{ matrix.php_version }}
+      
+      #     # Push $php_version + '.x' tag.
+      #     docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.x
+      #     docker push buluma/php-apache:${{ matrix.php_version }}.x
+     
+      #     # Push $php_version + '.PHP_RELEASE_VERSION' tag.
+      #     php_release_version=$(docker run --rm buluma/php-apache:${{ matrix.php_version }} bash -c "php -r 'echo PHP_RELEASE_VERSION;'")
+      #     docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
+      #     docker push buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
+     
+      #     # Push latest tag if building latest version.
+      #     if [[ "${{ matrix.php_version }}" == "7.4" ]]; then
+      #       docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:latest
+      #       docker push buluma/php-apache:latest
+      #     fi
