@@ -101,19 +101,19 @@ jobs:
       - name: Push image.
         run: |
           # Push $php_version tag.
-          docker push buluma/php-apache:${{ matrix.php_version }}
+          docker push geerlingguy/php-apache:${{ matrix.php_version }}
 
           # Push $php_version + '.x' tag.
-          docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.x
+          docker tag geerlingguy/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.x
           docker push buluma/php-apache:${{ matrix.php_version }}.x
 
           # Push $php_version + '.PHP_RELEASE_VERSION' tag.
-          php_release_version=$(docker run --rm buluma/php-apache:${{ matrix.php_version }} bash -c "php -r 'echo PHP_RELEASE_VERSION;'")
-          docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
+          php_release_version=$(docker run --rm geerlingguy/php-apache:${{ matrix.php_version }} bash -c "php -r 'echo PHP_RELEASE_VERSION;'")
+          docker tag geerlingguy/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
           docker push buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
 
           # Push latest tag if building latest version.
           if [[ "${{ matrix.php_version }}" == "8.0" ]]; then
-            docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:latest
+            docker tag geerlingguy/php-apache:${{ matrix.php_version }} buluma/php-apache:latest
             docker push buluma/php-apache:latest
           fi
