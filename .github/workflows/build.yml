@@ -59,7 +59,7 @@ jobs:
       matrix:
         php_version:
           - '8.0'
-          # - '7.4'
+          - '7.4'
           # - '7.3'
           # - '7.2'
           # - '7.1'
@@ -110,10 +110,10 @@ jobs:
           # Push $php_version + '.PHP_RELEASE_VERSION' tag.
           php_release_version=$(docker run --rm geerlingguy/php-apache:${{ matrix.php_version }} bash -c "php -r 'echo PHP_RELEASE_VERSION;'")
           docker tag geerlingguy/php-apache:${{ matrix.php_version }} geerlingguy/php-apache:${{ matrix.php_version }}.${php_release_version}
-          docker push geerlingguy/php-apache:${{ matrix.php_version }}.${php_release_version}
-          
+          docker push buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
+
           # Push latest tag if building latest version.
-          if [[ "${{ matrix.php_version }}" == "7.4" ]]; then
+          if [[ "${{ matrix.php_version }}" == "8.0" ]]; then
             docker tag geerlingguy/php-apache:${{ matrix.php_version }} geerlingguy/php-apache:latest
-            docker push geerlingguy/php-apache:latest
+            docker push buluma/php-apache:latest
           fi
