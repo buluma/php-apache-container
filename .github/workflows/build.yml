@@ -1,13 +1,18 @@
 ---
 name: Build
 
+# on:
+#   pull_request:
+#   push:
+#     branches:
+#       - master
+#   schedule:
+#     - cron: '30 * * * *'
 on:
-  pull_request:
   push:
-    branches:
-      - master
-  schedule:
-    - cron: '30 * * * *'
+    paths:
+      - 'vars/**'
+      - '.github/workflows/build.yml'
 
 env:
   ANSIBLE_FORCE_COLOR: true

@@ -1,15 +1,20 @@
 ---
 name: Docker Publish Image
 
+# on:
+#   push:
+#     # Publish `main` as Docker `latest` image.
+#     branches:
+#       - master
+
+#     # Publish `v1.2.3` tags as releases.
+#     tags:
+#       - v*
+
 on:
   push:
-    # Publish `main` as Docker `latest` image.
-    branches:
-      - master
-
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
+    paths:
+      - '.github/workflows/package.yml'
 
   # Run tests for any PRs.
   pull_request:
