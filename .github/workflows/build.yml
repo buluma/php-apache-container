@@ -16,6 +16,7 @@ on:
 
 env:
   ANSIBLE_FORCE_COLOR: true
+  IMAGE_NAME: docker-php-apache
 
 jobs:
   # Test the images build and work correctly.
