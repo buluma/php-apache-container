@@ -101,7 +101,7 @@ jobs:
       - name: Push image.
         run: |
           # Push $php_version tag.
-          docker push buluma/php-apache:${{ matrix.php_version }}
+          docker push geerlingguy/php-apache:${{ matrix.php_version }}
 
           # Push $php_version + '.x' tag.
           docker tag geerlingguy/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.x
