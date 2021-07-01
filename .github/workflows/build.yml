@@ -14,42 +14,42 @@ env:
 
 jobs:
   # Test the images build and work correctly.
-  # test:
-  #   name: Test
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       php_version:
-  #         - '8.0'
-  #         # - '7.4'
-  #         # - '7.3'
-  #         # - '7.2'
-  #         # - '7.1'
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version:
+          - '8.0'
+          - '7.4'
+          - '7.3'
+          - '7.2'
+          - '7.1'
 
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Set up Python 3.
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: '3.x'
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-  #     - name: Install prerequisites.
-  #       run: pip3 install ansible docker six
+      - name: Install prerequisites.
+        run: pip3 install ansible docker six
 
-  #     - name: Install role dependencies.
-  #       run: ansible-galaxy install -r requirements.yml
+      - name: Install role dependencies.
+        run: ansible-galaxy install -r requirements.yml
 
-  #     - name: Build the container.
-  #       run: ansible-playbook --extra-vars="@vars/${{ matrix.php_version }}.yml" main.yml
+      - name: Build the container.
+        run: ansible-playbook --extra-vars="@vars/${{ matrix.php_version }}.yml" main.yml
 
-  #     - name: Run the container.
-  #       run: docker run -d --name=php-apache -p 8080:80 geerlingguy/php-apache:${{ matrix.php_version }} /usr/sbin/apache2ctl -D FOREGROUND
+      - name: Run the container.
+        run: docker run -d --name=php-apache -p 8080:80 buluma/php-apache:${{ matrix.php_version }} /usr/sbin/apache2ctl -D FOREGROUND
 
-  #     - name: Verify container has correct PHP version and works.
-  #       run: |
-  #         docker exec php-apache php -v | grep ${{ matrix.php_version }}
-  #         curl http://localhost:8080/
+      - name: Verify container has correct PHP version and works.
+        run: |
+          docker exec php-apache php -v | grep ${{ matrix.php_version }}
+          curl http://localhost:8080/
   
   # If on master branch, build and release images.
   release:
@@ -61,8 +61,8 @@ jobs:
           - '8.0'
           - '7.4'
           - '7.3'
-          # - '7.2'
-          # - '7.1'
+          - '7.2'
+          - '7.1'
     # needs: test
     if: github.ref == 'refs/heads/master'
 
@@ -93,10 +93,6 @@ jobs:
         run: |
           # Push $php_version tag.
           docker push buluma/php-apache:${{ matrix.php_version }}
-
-          # check docker build
-          docker container ls
-          docker image ls
 
           # Push $php_version + '.x' tag.
           docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.x

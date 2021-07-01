@@ -1,11 +1,11 @@
 # PHP Apache Container (Built with Ansible)
 
-[![CI](https://github.com/geerlingguy/php-apache-container/workflows/Build/badge.svg?branch=master&event=push)](https://github.com/geerlingguy/php-apache-container/actions?query=workflow%3ABuild) [![Docker pulls](https://img.shields.io/docker/pulls/geerlingguy/php-apache)](https://hub.docker.com/r/geerlingguy/php-apache/)
+[![CI](https://github.com/buluma/php-apache-container/workflows/Build/badge.svg?branch=master&event=push)](https://github.com/buluma/php-apache-container/actions?query=workflow%3ABuild) [![Docker pulls](https://img.shields.io/docker/pulls/buluma/php-apache)](https://hub.docker.com/r/buluma/php-apache/)
 
 This project is composed of three main parts:
 
-  - **Ansible project**: This project is maintained on GitHub: [geerlingguy/php-apache-container](https://github.com/geerlingguy/php-apache-container). Please file issues, support requests, etc. against this GitHub repository.
-  - **Docker Hub Image**: If you just want to use [the `geerlingguy/php-apache` Docker image](https://hub.docker.com/r/geerlingguy/php-apache/) in your project, you can pull it from Docker Hub.
+  - **Ansible project**: This project is maintained on GitHub: [buluma/php-apache-container](https://github.com/buluma/php-apache-container). Please file issues, support requests, etc. against this GitHub repository.
+  - **Docker Hub Image**: If you just want to use [the `buluma/php-apache` Docker image](https://hub.docker.com/r/buluma/php-apache/) in your project, you can pull it from Docker Hub.
   - **Ansible Role**: If you need a flexible Ansible role that's compatible with both traditional servers and containerized builds, check out [`geerlingguy.php`](https://galaxy.ansible.com/geerlingguy/php/) on Ansible Galaxy. (This is the Ansible role that does the bulk of the work in managing the PHP container.)
 
 ## Versions
@@ -19,9 +19,9 @@ Currently maintained versions include:
 
 ## Standalone Usage
 
-If you want to use the `geerlingguy/php-apache` image from Docker Hub, you don't need to install or use this project at all. You can quickly build a PHP container locally with:
+If you want to use the `buluma/php-apache` image from Docker Hub, you don't need to install or use this project at all. You can quickly build a PHP container locally with:
 
-    docker run -d --name=php-apache -p 80:80 geerlingguy/php-apache:latest /usr/sbin/apache2ctl -D FOREGROUND
+    docker run -d --name=php-apache -p 80:80 buluma/php-apache:latest /usr/sbin/apache2ctl -D FOREGROUND
 
 You can also wrap up that configuration in a `Dockerfile` and/or a `docker-compose.yml` file if you want to keep things simple. For example:
 
@@ -29,7 +29,7 @@ You can also wrap up that configuration in a `Dockerfile` and/or a `docker-compo
     
     services:
       php-apache:
-        image: geerlingguy/php-apache:latest
+        image: buluma/php-apache:latest
         container_name: php-apache
         ports:
           - "80:80"
@@ -101,4 +101,4 @@ MIT / BSD
 
 ## Author Information
 
-This container build was created in 2018 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This container build was created in 2021 by [Michael Buluma](https://www.buluma.co.ke/).
