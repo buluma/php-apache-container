@@ -103,6 +103,10 @@ jobs:
           # Push $php_version tag.
           docker push geerlingguy/php-apache:${{ matrix.php_version }}
 
+          # check docker build
+          docker container ls
+          docker image ls
+
           # Push $php_version + '.x' tag.
           docker tag geerlingguy/php-apache:${{ matrix.php_version }} buluma/php-apache:${{ matrix.php_version }}.x
           docker push buluma/php-apache:${{ matrix.php_version }}.x
