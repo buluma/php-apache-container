@@ -8,12 +8,7 @@ on:
       - master
   schedule:
     - cron: '30 * * * *'
-    
-# on:
-#   push:
-#     paths:
-#       - 'vars/**'
-#       - '.github/workflows/build.yml'
+  workflow_dispatch:
 
 env:
   ANSIBLE_FORCE_COLOR: true
