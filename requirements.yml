@@ -4,3 +4,4 @@
 - src: geerlingguy.php
 - src: geerlingguy.php-mysql
 - src: geerlingguy.composer
+- src: geerlingguy.ansible

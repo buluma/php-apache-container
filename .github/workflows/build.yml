@@ -108,7 +108,7 @@ jobs:
           docker push buluma/php-apache:${{ matrix.php_version }}.${php_release_version}
 
           # Push latest tag if building latest version.
-          if [[ "${{ matrix.php_version }}" == "8.0" ]]; then
+          if [[ "${{ matrix.php_version }}" == "8.1" ]]; then
             docker tag buluma/php-apache:${{ matrix.php_version }} buluma/php-apache:latest
             docker push buluma/php-apache:latest
           fi
