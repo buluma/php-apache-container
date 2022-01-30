@@ -15,7 +15,7 @@
     # PHP settings.
     php_version: '8.1'
     php_packages_extra:
-      - libapache2-mod-php8.0
+      - libapache2-mod-php8.1
     php_install_recommends: no
 
     # Handy utilities.

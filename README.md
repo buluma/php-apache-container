@@ -13,7 +13,8 @@ This project is composed of three main parts:
 
 Currently maintained versions include:
 
-  - `8.0`, `8.0.x`, `latest`: PHP 8.0.x
+  - `8.1`, `8.1.x`, `latest`: PHP 8.1.x
+  - `8.0`, `8.0.x`, PHP 8.0.x
   - `7.4`, `7.4.x`, PHP 7.4.x
   - `7.3`, `7.3.x`: PHP 7.3.x
   - `7.2`, `7.2.x`: PHP 7.2.x
