@@ -61,13 +61,13 @@
       delegate_to: '{{ container_name }}'
 
   roles:
-    - name: geerlingguy.apache
+    - name: buluma.apache
       delegate_to: '{{ container_name }}'
 
     - name: geerlingguy.php-versions
       delegate_to: '{{ container_name }}'
 
-    - name: geerlingguy.php
+    - name: buluma.php
       delegate_to: '{{ container_name }}'
 
     - name: geerlingguy.php-mysql
@@ -76,7 +76,7 @@
     - name: geerlingguy.composer
       delegate_to: '{{ container_name }}'
 
-    - role: geerlingguy.ansible
+    - role: buluma.ansible
       delegate_to: '{{ container_name }}'
 
   post_tasks:
