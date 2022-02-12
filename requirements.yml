@@ -1,7 +1,7 @@
 ---
-- src: buluma.apache
+- src: geerlingguy.apache
 - src: geerlingguy.php-versions
-- src: buluma.php
+- src: geerlingguy.php
 - src: geerlingguy.php-mysql
 - src: geerlingguy.composer
-- src: buluma.ansible
+- src: geerlingguy.ansible
