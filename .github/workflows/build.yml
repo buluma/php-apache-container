@@ -2,13 +2,17 @@
 name: Build
 
 on:
-  pull_request:
   push:
     branches:
       - master
-  schedule:
-    - cron: '3 4,9,10,22 * * *'
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: 'false'
+  schedule:
+    - cron: '0 7 * * *'
   
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
